@@ -1,0 +1,38 @@
+@import './variables.scss';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: calc(16px + 0.25vw);
+  line-height: calc(1.1em + 0.25vw);
+  margin: 0.5em;
+}
+
+h1,
+h2,
+h3,
+h5,
+h5 {
+  font-family: 'Courgette', cursive;
+}
+
+h1 {
+  font-size: calc(20px + 1.25vw);
+  color: $primary;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: $primary;
+}
+
+h1,
+h2 {
+  font-weight: bold;
+}
+
+h1,
+h2,
+p {
+  margin: 0.5em 0;
+}
