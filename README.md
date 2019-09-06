@@ -1,3 +1,7 @@
+# La La's Kitchen
+
+Find recipes, prepare meal plans with shopping lists, get ideas and build a cookbook
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
