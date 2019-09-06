@@ -1,0 +1,16 @@
+@import '../variables.scss';
+
+.recipe {
+  margin-bottom: 2rem;
+  border: 1px solid mix(black, lemonchiffon, 20%);
+  &:hover,
+  &:focus {
+    border: 1px solid $primary;
+  }
+}
+
+.recipe__image {
+  max-width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
