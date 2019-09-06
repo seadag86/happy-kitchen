@@ -1,0 +1,32 @@
+@import './variables.scss';
+
+.app__header {
+  line-height: '64px';
+  padding: 0 3.5%;
+  background-color: mix(black, $maroon, 50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.app__logo {
+  color: $primary;
+}
+
+.app__menu {
+  line-height: 64px;
+  background-color: mix(black, $maroon, 50%);
+}
+
+.app__content {
+  padding: 2.5rem 3.5% 3rem 3.5%;
+  background: lemonchiffon url('./assets/images/bg-pattern.jpg') repeat;
+  background-size: 30%;
+}
+
+.app__footer {
+  padding: 2.5rem 4%;
+  text-align: center;
+  color: white;
+  background-color: $primary;
+}
