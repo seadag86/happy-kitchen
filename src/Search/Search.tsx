@@ -3,9 +3,9 @@ import { Row, Col, Button } from 'antd';
 import styles from './Search.module.scss';
 
 const Search = () => {
-  const onSearchClick = () => {};
+  // const onSearchClick = () => {};
 
-  const onfilterClick = () => {};
+  // const onfilterClick = () => {};
 
   return (
     <section className={styles['app__search']}>

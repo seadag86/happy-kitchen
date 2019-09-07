@@ -1,11 +1,7 @@
 import { IRecipe } from './Recipe/Recipe';
 
 export interface IState {
-  recipeStore: {
-    loading: boolean;
-    loaded: boolean;
-    recipes: IRecipe[];
-  };
+  recipes: IRecipe[];
 }
 
 export interface IAction {
@@ -14,23 +10,13 @@ export interface IAction {
 }
 
 export const initialState: IState = {
-  recipeStore: {
-    loading: false,
-    loaded: false,
-    recipes: []
-  }
+  recipes: []
 };
 
 export const reducer = (state: IState, action: IAction) => {
   switch (action.type) {
-    case 'loadRecipe':
-      return {};
-    case 'createRecipe':
-      return {};
-    case 'updateRecipe':
-      return {};
-    case 'removeRecipe':
-      return {};
+    case 'loadRecipes':
+      return { ...state, recipes: [...state.recipes, ...action.payload] };
 
     default:
       return state;
