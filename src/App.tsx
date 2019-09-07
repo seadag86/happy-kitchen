@@ -4,14 +4,18 @@ import Recipe, { IRecipe } from './Recipe/Recipe';
 import Search from './Search/Search';
 import Overlay from './Overlay/Overlay';
 import { recipeApi } from './Recipe/recipie.api';
+import { useStateValue } from './state';
 import styles from './App.module.scss';
+import { IState, IAction } from './reducer';
 
 const App: React.FC = () => {
-  const [recipes, setRecipies] = useState([]);
+  const { Header, Content, Footer } = Layout;
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('chicken');
-
-  const { Header, Content, Footer } = Layout;
+  const [{ recipes }, dispatch] = useStateValue() as [
+    IState,
+    React.Dispatch<IAction>
+  ];
 
   useEffect(() => {
     getRecepies();
@@ -20,8 +24,8 @@ const App: React.FC = () => {
   const getRecepies = async () => {
     const response = await recipeApi({ query: search });
     const data = await response.json();
-    setRecipies(data.results);
-    console.log(data.results);
+    dispatch({ type: 'loadRecipes', payload: data.results });
+    console.log('context', recipes);
   };
 
   const getSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -52,24 +56,24 @@ const App: React.FC = () => {
         </Menu>
       </Header>
 
-      <Search />
+      <form onSubmit={getSearch}>
+        <input onChange={updateSearch} value={search} />
+      </form>
 
       <Content className={styles['app__content']}>
         <article className={styles['recipe__container']}>
           <Row type="flex" justify="space-between" gutter={25}>
-            {recipes.map((r: IRecipe, ci) => (
-              <Col sm={12} md={8} xl={6}>
+            {recipes.map((r: IRecipe, i) => (
+              <Col key={i} sm={12} md={8} xl={6}>
                 <Recipe key={r.id} {...r} />
               </Col>
             ))}
           </Row>
         </article>
       </Content>
-
       <Footer className={styles['app__footer']}>
         La La's Ketchen ©2019 Created by Rally Media
       </Footer>
-
       <Overlay active={false}></Overlay>
     </Layout>
   );
