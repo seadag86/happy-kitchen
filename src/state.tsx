@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { IState } from './reducer';
+import { IState, IAction } from './reducer';
 
 export interface IStateProvider {
   reducer: any;
@@ -18,4 +18,5 @@ export const StateProvider: React.FC<IStateProvider> = ({
   </StateContext.Provider>
 );
 
-export const useStateValue = () => useContext(StateContext);
+export const useStateValue = () =>
+  useContext(StateContext) as [IState, React.Dispatch<IAction>];
