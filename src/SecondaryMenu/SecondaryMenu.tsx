@@ -1,27 +1,30 @@
-import React from 'react';
-import { Row, Col, Button } from 'antd';
-import styles from './SecondaryMenu.module.scss';
-import { useStateValue } from '../state';
+import React from "react";
+import { Row, Col, Button } from "antd";
+import styles from "./SecondaryMenu.module.scss";
+import { useStateValue } from "../state";
 
 const SecondaryMenu = () => {
-  const [_, dispatch] = useStateValue();
+  const [{ searchQuery }, dispatch] = useStateValue();
 
   const onSearchClick = () => {
-    dispatch({ type: 'toggleOverlay', payload: true });
-    document.body.style.overflow = 'hidden';
+    dispatch({ type: "toggleOverlay", payload: true });
+    document.body.style.overflow = "hidden";
   };
 
   const onFilterClick = () => {
-    dispatch({ type: 'toggleOverlay', payload: true });
-    document.body.style.overflow = 'hidden';
+    dispatch({ type: "toggleOverlay", payload: true });
+    document.body.style.overflow = "hidden";
   };
 
+  const searchClass = searchQuery.length ? "active" : "";
+
   return (
-    <section className={styles['app__search']}>
+    <section className={styles["app__search"]}>
       <Row type="flex" justify="space-between" align="middle">
         <Col>
           <Button type="link" icon="search" onClick={onSearchClick}>
-            Search
+            <label className={styles[searchClass]}>Search</label>&nbsp;
+            <strong>{searchQuery}</strong>
           </Button>
         </Col>
 
