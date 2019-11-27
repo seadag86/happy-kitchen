@@ -7,6 +7,7 @@ import { recipeApi } from "./Recipe/recipie.api";
 import { useStateValue } from "./state";
 import styles from "./App.module.scss";
 import OverlaySearch from "./Overlay/OverlaySearch";
+import logo from "./assets/images/logo.svg";
 
 const App: React.FC = () => {
   const { Header, Content, Footer } = Layout;
@@ -18,6 +19,7 @@ const App: React.FC = () => {
     const getRecepies = async () => {
       const response = await recipeApi({ query: searchQuery });
       const data = await response.json();
+      console.log(data);
       dispatch({ type: "loadRecipes", payload: data.results });
     };
 
@@ -28,8 +30,9 @@ const App: React.FC = () => {
     <Fragment>
       <Layout className="layout" style={blureEffect}>
         <Header className={styles["app__header"]}>
-          <h1 className={styles["app__logo"]}>La La's Kitchen</h1>
-
+          <img src={logo} alt="Logo" />
+          <h1>La La's Kitchen</h1>
+          <span className={styles["spacer"]}></span>
           <Menu
             theme="dark"
             mode="horizontal"
