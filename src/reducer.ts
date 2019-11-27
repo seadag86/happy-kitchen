@@ -26,7 +26,7 @@ export const initialState: IState = {
 export const reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case "loadRecipes":
-      return { ...state, recipes: [...state.recipes, ...action.payload] };
+      return { ...state, recipes: action.payload };
     case "toggleOverlay":
       return { ...state, overlayActive: !state.overlayActive };
     case "submitSearch":

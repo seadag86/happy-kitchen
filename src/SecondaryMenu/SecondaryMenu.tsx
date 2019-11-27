@@ -23,7 +23,7 @@ const SecondaryMenu = () => {
       <Row type="flex" justify="space-between" align="middle">
         <Col>
           <Button type="link" icon="search" onClick={onSearchClick}>
-            <label className={styles[searchClass]}>Search</label>&nbsp;
+            <label className={styles[searchClass]}>&nbsp;Search</label>&nbsp;
             <strong>{searchQuery}</strong>
           </Button>
         </Col>

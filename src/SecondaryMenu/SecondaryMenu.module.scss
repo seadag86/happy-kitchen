@@ -1,7 +1,11 @@
 .app__search {
   padding: 0.6rem 3.5%;
-  background-color: lemonchiffon;
+  color: #333;
+  background-color: #fff9ed;
   label.active::after {
     content: ":";
+  }
+  button {
+    color: #333;
   }
 }
