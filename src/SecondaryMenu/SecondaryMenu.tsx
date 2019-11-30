@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Row, Col, Button } from "antd";
 import styles from "./SecondaryMenu.module.scss";
-import { useStateValue } from "../state";
+import { StoreContext } from "../store";
 
 const SecondaryMenu = () => {
-  const [{ searchQuery }, dispatch] = useStateValue();
+  const { state: { searchQuery }, dispatch } = useContext(StoreContext);
 
   const onSearchClick = () => {
     dispatch({ type: "toggleOverlay", payload: true });
-    document.body.style.overflow = "hidden";
   };
 
   const onFilterClick = () => {
     dispatch({ type: "toggleOverlay", payload: true });
-    document.body.style.overflow = "hidden";
   };
 
   const searchClass = searchQuery.length ? "active" : "";

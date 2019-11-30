@@ -2,16 +2,16 @@ import React, {
   KeyboardEvent,
   ChangeEvent,
   useState,
-  RefObject,
-  useEffect
+  useEffect,
+  useContext
 } from "react";
-import { useStateValue } from "../state";
 import { Tooltip, Icon } from "antd";
 import styles from "./OverlaySearch.module.scss";
+import { StoreContext } from "../store";
 
 const OverlaySearch = () => {
   const [searchValue, setSearchValue] = useState();
-  const [, dispatch] = useStateValue();
+  const { dispatch } = useContext(StoreContext);
   let searchInput: React.RefObject<HTMLInputElement> = React.createRef();
 
   const onSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ const OverlaySearch = () => {
         onChange={onSearchValueChange}
       />
 
-      <Tooltip title="Press enter after typing or choose an item from the list">
+      <Tooltip title="Press enter after typing search terms">
         <Icon type="info-circle" />
       </Tooltip>
     </form>

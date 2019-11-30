@@ -1,17 +1,17 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import { Layout, Menu, Row, Col } from "antd";
 import Recipe, { IRecipe } from "./Recipe/Recipe";
 import SecondaryMenu from "./SecondaryMenu/SecondaryMenu";
 import Overlay from "./Overlay/Overlay";
 import { recipeApi } from "./Recipe/recipie.api";
-import { useStateValue } from "./state";
 import styles from "./App.module.scss";
 import OverlaySearch from "./Overlay/OverlaySearch";
 import logo from "./assets/images/logo.svg";
+import { StoreContext } from "./store";
 
 const App: React.FC = () => {
   const { Header, Content, Footer } = Layout;
-  const [{ recipes, overlayActive, searchQuery }, dispatch] = useStateValue();
+  const { state: { recipes, overlayActive, searchQuery }, dispatch } = useContext(StoreContext);
 
   const blureEffect = overlayActive ? { filter: "blur(8px)" } : {};
 
@@ -19,7 +19,7 @@ const App: React.FC = () => {
     const getRecepies = async () => {
       const response = await recipeApi({ query: searchQuery });
       const data = await response.json();
-      console.log(data);
+
       dispatch({ type: "loadRecipes", payload: data.results });
     };
 
@@ -50,7 +50,7 @@ const App: React.FC = () => {
         <Content className={styles["app__content"]}>
           <article className={styles["recipe__container"]}>
             <Row type="flex" justify="space-between" gutter={25}>
-              {recipes.map((r: IRecipe, i) => (
+              {recipes.map((r: IRecipe, i: number) => (
                 <Col key={i} sm={12} md={8} xl={6}>
                   <Recipe key={r.id} {...r} />
                 </Col>
@@ -63,7 +63,7 @@ const App: React.FC = () => {
         </Footer>
       </Layout>
 
-      <Overlay active={overlayActive}>
+      <Overlay>
         <OverlaySearch />
       </Overlay>
     </Fragment>
