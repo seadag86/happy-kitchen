@@ -10,7 +10,7 @@ const Overlay: React.FC = ({ children }) => {
   const onCloseOverlay = () => {
     dispatch({ type: "toggleOverlay", payload: false });
     dispatch({ type: "toggleSearch", payload: false });
-    dispatch({ type: "toggleSearch", payload: false });
+    dispatch({ type: "toggleFilter", payload: false });
   };
 
   useEffect(() => {
