@@ -8,6 +8,7 @@ import styles from "./App.module.scss";
 import OverlaySearch from "./Overlay/OverlaySearch";
 import logo from "./assets/images/logo.svg";
 import { StoreContext } from "./store";
+import OverlayFilter from "./Overlay/OverlayFilter";
 
 const App: React.FC = () => {
   const { Header, Content, Footer } = Layout;
@@ -51,7 +52,7 @@ const App: React.FC = () => {
           <article className={styles["recipe__container"]}>
             <Row type="flex" justify="space-between" gutter={25}>
               {recipes.map((r: IRecipe, i: number) => (
-                <Col key={i} sm={12} md={8} xl={6}>
+                <Col key={i} xs={24} sm={12} md={8} lg={6} xl={4}>
                   <Recipe key={r.id} {...r} />
                 </Col>
               ))}
@@ -65,6 +66,7 @@ const App: React.FC = () => {
 
       <Overlay>
         <OverlaySearch />
+        <OverlayFilter />
       </Overlay>
     </Fragment>
   );
