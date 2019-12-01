@@ -1,4 +1,4 @@
-# La La's Kitchen
+# Happy Kitchen
 
 Find recipes, prepare meal plans with shopping lists, get ideas and build a cookbook
 
