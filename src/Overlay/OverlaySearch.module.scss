@@ -1,5 +1,14 @@
 @import '../variables.scss';
 
+.overlay__search {
+  display: none;
+  margin-top: 5rem;
+}
+
+.overlay__search--active {
+  display: flex;
+}
+
 .search__form {
   display: flex;
   flex-direction: row;

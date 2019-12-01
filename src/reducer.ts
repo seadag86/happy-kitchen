@@ -1,4 +1,5 @@
 import { IRecipe } from "./Recipe/Recipe";
+import { filters, IFilter } from "./data";
 
 export interface IAction {
   type: string;
@@ -10,8 +11,10 @@ export interface IState {
   recipesLoading: boolean;
   recipesLoaded: boolean;
   overlayActive: boolean;
+  searchActive: boolean;
   searchQuery: string;
-  filterChoices: string[];
+  filterActive: boolean;
+  filterChoices: IFilter[];
 }
 
 export const initialState: IState = {
@@ -19,8 +22,10 @@ export const initialState: IState = {
   recipesLoading: false,
   recipesLoaded: false,
   overlayActive: false,
+  searchActive: false,
   searchQuery: "",
-  filterChoices: [],
+  filterActive: false,
+  filterChoices: filters,
 };
 
 export const reducer = (state = initialState, action: IAction) => {
@@ -28,9 +33,13 @@ export const reducer = (state = initialState, action: IAction) => {
     case "loadRecipes":
       return { ...state, recipes: action.payload };
     case "toggleOverlay":
-      return { ...state, overlayActive: !state.overlayActive };
+      return { ...state, overlayActive: action.payload };
+    case "toggleSearch":
+      return { ...state, searchActive: action.payload };
     case "submitSearch":
       return { ...state, searchQuery: action.payload };
+    case "toggleFilter":
+      return { ...state, filterActive: action.payload };
     case "submitFilters":
       return { ...state, filterChoices: state.filterChoices };
 

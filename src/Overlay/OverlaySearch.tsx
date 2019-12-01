@@ -11,7 +11,8 @@ import { StoreContext } from "../store";
 
 const OverlaySearch = () => {
   const [searchValue, setSearchValue] = useState();
-  const { dispatch } = useContext(StoreContext);
+  const { state: { searchActive }, dispatch } = useContext(StoreContext);
+  const isActive = searchActive ? "overlay__search--active" : "";
   let searchInput: React.RefObject<HTMLInputElement> = React.createRef();
 
   const onSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,20 +33,22 @@ const OverlaySearch = () => {
   }, [searchInput]);
 
   return (
-    <form className={styles["search__form"]} onSubmit={onSearchFormSubmit}>
-      <Icon type="search" />
+    <div className={`${styles["overlay__search"]} ${styles[isActive]}`}>
+      <form className={styles["search__form"]} onSubmit={onSearchFormSubmit}>
+        <Icon type="search" />
 
-      <input
-        type="search"
-        ref={searchInput}
-        placeholder="Find a recipe"
-        onChange={onSearchValueChange}
-      />
+        <input
+          type="search"
+          ref={searchInput}
+          placeholder="Find a recipe"
+          onChange={onSearchValueChange}
+        />
 
-      <Tooltip title="Press enter after typing search terms">
-        <Icon type="info-circle" />
-      </Tooltip>
-    </form>
+        <Tooltip title="Press enter after typing search terms">
+          <Icon type="info-circle" />
+        </Tooltip>
+      </form>
+    </div>
   );
 };
 

@@ -8,10 +8,14 @@ const SecondaryMenu = () => {
 
   const onSearchClick = () => {
     dispatch({ type: "toggleOverlay", payload: true });
+    dispatch({ type: "toggleSearch", payload: true });
+    console.log('search toggled')
   };
 
   const onFilterClick = () => {
     dispatch({ type: "toggleOverlay", payload: true });
+    dispatch({ type: "toggleFilter", payload: true });
+    console.log('filters toggled')
   };
 
   const searchClass = searchQuery.length ? "active" : "";
