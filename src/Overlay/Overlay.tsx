@@ -5,7 +5,7 @@ import { StoreContext } from "../store";
 
 const Overlay: React.FC = ({ children }) => {
   const { state: { overlayActive }, dispatch } = useContext(StoreContext);
-  const isActive = overlayActive ? "--active" : "";
+  const isActive = overlayActive ? "overlay--active" : "";
 
   const onCloseOverlay = () => {
     dispatch({ type: "toggleOverlay", payload: false });
@@ -20,7 +20,7 @@ const Overlay: React.FC = ({ children }) => {
   }, [overlayActive]);
 
   return (
-    <section className={`${styles["overlay"]} ${styles[`overlay${isActive}`]}`}>
+    <section className={`${styles["overlay"]} ${styles[isActive]}`}>
       <header className={styles["overlay__header"]}>
         <Button
           type="link"
