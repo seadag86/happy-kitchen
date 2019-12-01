@@ -12,7 +12,10 @@ import OverlayFilter from "./Overlay/OverlayFilter";
 
 const App: React.FC = () => {
   const { Header, Content, Footer } = Layout;
-  const { state: { recipes, overlayActive, searchQuery }, dispatch } = useContext(StoreContext);
+  const {
+    state: { recipes, overlayActive, searchQuery },
+    dispatch
+  } = useContext(StoreContext);
 
   const blureEffect = overlayActive ? { filter: "blur(8px)" } : {};
 
@@ -32,7 +35,7 @@ const App: React.FC = () => {
       <Layout className="layout" style={blureEffect}>
         <Header className={styles["app__header"]}>
           <img src={logo} alt="Logo" />
-          <h1>La La's Kitchen</h1>
+          <h1>Happy Kitchen</h1>
           <span className={styles["spacer"]}></span>
           <Menu
             theme="dark"
@@ -60,7 +63,7 @@ const App: React.FC = () => {
           </article>
         </Content>
         <Footer className={styles["app__footer"]}>
-          La La's Ketchen ©2019 Created by Rally Media
+          Happy Ketchen ©2019 Created by Rally Media
         </Footer>
       </Layout>
 
