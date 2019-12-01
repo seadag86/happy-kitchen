@@ -1,9 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import OverlaySearch from './OverlaySearch';
+import React from "react";
+import { render, fireEvent, cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<OverlaySearch />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import OverlaySearch from "./OverlaySearch";
+
+afterEach(cleanup);
+
+it("renders search input", () => {
+  const { getByPlaceholderText, debug } = render(<OverlaySearch />);
+  const input = getByPlaceholderText("Find a recipe");
+  expect(input.getAttribute("placeholder")).toBe("Find a recipe");
+});
+
+it("closes overlay after ", () => {
+  const { getByPlaceholderText, debug } = render(<OverlaySearch />);
+  const input = getByPlaceholderText("Find a recipe");
+  expect(input.getAttribute("placeholder")).toBe("Find a recipe");
 });
