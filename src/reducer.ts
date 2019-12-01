@@ -1,9 +1,20 @@
+import { IRecipe } from "./Recipe/Recipe";
+
 export interface IAction {
   type: string;
   payload: any;
 }
 
-export const initialState = {
+export interface IState {
+  recipes: IRecipe[];
+  recipesLoading: boolean;
+  recipesLoaded: boolean;
+  overlayActive: boolean;
+  searchQuery: string;
+  filterChoices: string[];
+}
+
+export const initialState: IState = {
   recipes: [],
   recipesLoading: false,
   recipesLoaded: false,

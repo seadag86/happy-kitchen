@@ -4,9 +4,10 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './store';
+import { initialState, reducer } from './reducer';
 
 ReactDOM.render(
-  <StoreProvider>
+  <StoreProvider initialState={initialState} reducer={reducer}>
     <App />
   </StoreProvider >,
   document.getElementById('root')
