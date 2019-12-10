@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './store';
 import { initialState, reducer } from './reducer';
+import './index.scss'
 
 ReactDOM.render(
   <StoreProvider initialState={initialState} reducer={reducer}>
