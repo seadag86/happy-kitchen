@@ -55,7 +55,7 @@ const App: React.FC = () => {
           <article className={styles["recipe__container"]}>
             <Row type="flex" justify="space-between" gutter={25}>
               {recipes.map((r: IRecipe, i: number) => (
-                <Col key={i} xs={24} sm={12} md={8} lg={6} xl={4}>
+                <Col key={i} xs={24} sm={12} md={8} lg={8} xl={6}>
                   <Recipe key={r.id} {...r} />
                 </Col>
               ))}
