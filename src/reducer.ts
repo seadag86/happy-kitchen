@@ -23,7 +23,7 @@ export const initialState: IState = {
   recipesLoaded: false,
   overlayActive: false,
   searchActive: false,
-  searchQuery: "random",
+  searchQuery: "",
   filterActive: false,
   filterChoices: filters
 };
@@ -43,6 +43,15 @@ export const reducer = (state = initialState, action: IAction) => {
       return { ...state, filterActive: action.payload };
     case "submitFilters":
       return { ...state, filterChoices: action.payload };
+    case "clearFilterChoices":
+      const resetChoices = state.filterChoices.map(col => {
+        col.choices.map(choice => {
+          choice.enabled = false;
+          return choice;
+        });
+        return col;
+      });
+      return { ...state, filterChoices: resetChoices };
 
     default:
       return state;

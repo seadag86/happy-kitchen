@@ -5,13 +5,16 @@ import React, {
   useEffect,
   useContext
 } from "react";
-import { Tooltip, Icon } from "antd";
+import { Tooltip, Icon, Row, Button } from "antd";
 import styles from "./OverlaySearch.module.scss";
 import { StoreContext } from "../store";
 
 const OverlaySearch = () => {
   const [searchValue, setSearchValue] = useState();
-  const { state: { searchActive }, dispatch } = useContext(StoreContext);
+  const {
+    state: { searchActive },
+    dispatch
+  } = useContext(StoreContext);
   const isActive = searchActive ? "overlay__search--active" : "";
   let searchInput: React.RefObject<HTMLInputElement> = React.createRef();
 
@@ -21,11 +24,23 @@ const OverlaySearch = () => {
     setSearchValue(target.value);
   };
 
+  const onCloseSearch = () => {
+    dispatch({ type: "toggleOverlay", payload: false });
+    dispatch({ type: "toggleSearch", payload: false });
+  };
+
+  const onCancelSearch = () => {
+    dispatch({ type: "submitSearch", payload: "" });
+  };
+
   const onSearchFormSubmit = (e: KeyboardEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch({ type: "submitSearch", payload: searchValue });
-    dispatch({ type: "toggleOverlay", payload: false });
+    if (searchValue) {
+      dispatch({ type: "submitSearch", payload: searchValue });
+    }
+
+    onCloseSearch();
   };
 
   useEffect(() => {
@@ -35,18 +50,34 @@ const OverlaySearch = () => {
   return (
     <div className={`${styles["overlay__search"]} ${styles[isActive]}`}>
       <form className={styles["search__form"]} onSubmit={onSearchFormSubmit}>
-        <Icon type="search" />
+        <Row className={styles["search__form__fields"]}>
+          <Icon type="search" />
 
-        <input
-          type="search"
-          ref={searchInput}
-          placeholder="Find a recipe"
-          onChange={onSearchValueChange}
-        />
+          <input
+            type="search"
+            ref={searchInput}
+            placeholder="Find a recipe"
+            onChange={onSearchValueChange}
+          />
 
-        <Tooltip title="Press enter after typing search terms">
-          <Icon type="info-circle" />
-        </Tooltip>
+          <Tooltip title="Press enter after typing search terms">
+            <Icon type="info-circle" />
+          </Tooltip>
+        </Row>
+
+        <Row className="form__actions" type="flex" justify="start">
+          <Button type="primary" htmlType="submit" onClick={onCloseSearch}>
+            CLOSE
+          </Button>
+          <Button
+            type="primary"
+            ghost
+            htmlType="reset"
+            onClick={onCancelSearch}
+          >
+            RESET
+          </Button>
+        </Row>
       </form>
     </div>
   );
