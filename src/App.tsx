@@ -1,17 +1,21 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import { Layout, Menu, Row, Col } from "antd";
 import Recipe, { IRecipe } from "./Recipe/Recipe";
 import SecondaryMenu from "./SecondaryMenu/SecondaryMenu";
 import Overlay from "./Overlay/Overlay";
 import { recipeApi } from "./Recipe/recipie.api";
-import { useStateValue } from "./state";
 import styles from "./App.module.scss";
 import OverlaySearch from "./Overlay/OverlaySearch";
 import logo from "./assets/images/logo.svg";
+import { StoreContext } from "./store";
+import OverlayFilter from "./Overlay/OverlayFilter";
 
 const App: React.FC = () => {
   const { Header, Content, Footer } = Layout;
-  const [{ recipes, overlayActive, searchQuery }, dispatch] = useStateValue();
+  const {
+    state: { recipes, overlayActive, searchQuery },
+    dispatch
+  } = useContext(StoreContext);
 
   const blureEffect = overlayActive ? { filter: "blur(8px)" } : {};
 
@@ -19,7 +23,7 @@ const App: React.FC = () => {
     const getRecepies = async () => {
       const response = await recipeApi({ query: searchQuery });
       const data = await response.json();
-      console.log(data);
+
       dispatch({ type: "loadRecipes", payload: data.results });
     };
 
@@ -31,7 +35,7 @@ const App: React.FC = () => {
       <Layout className="layout" style={blureEffect}>
         <Header className={styles["app__header"]}>
           <img src={logo} alt="Logo" />
-          <h1>La La's Kitchen</h1>
+          <h1>Happy Kitchen</h1>
           <span className={styles["spacer"]}></span>
           <Menu
             theme="dark"
@@ -50,8 +54,8 @@ const App: React.FC = () => {
         <Content className={styles["app__content"]}>
           <article className={styles["recipe__container"]}>
             <Row type="flex" justify="space-between" gutter={25}>
-              {recipes.map((r: IRecipe, i) => (
-                <Col key={i} sm={12} md={8} xl={6}>
+              {recipes.map((r: IRecipe, i: number) => (
+                <Col key={i} xs={24} sm={12} md={8} lg={8} xl={6}>
                   <Recipe key={r.id} {...r} />
                 </Col>
               ))}
@@ -59,12 +63,13 @@ const App: React.FC = () => {
           </article>
         </Content>
         <Footer className={styles["app__footer"]}>
-          La La's Ketchen ©2019 Created by Rally Media
+          Happy Ketchen ©2019 Created by Rally Media
         </Footer>
       </Layout>
 
-      <Overlay active={overlayActive}>
+      <Overlay>
         <OverlaySearch />
+        <OverlayFilter />
       </Overlay>
     </Fragment>
   );

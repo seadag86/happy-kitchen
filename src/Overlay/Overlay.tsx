@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Overlay.module.scss";
 import { Button } from "antd";
-import { useStateValue } from "../state";
+import { StoreContext } from "../store";
 
-export interface IOverlay {
-  active: boolean;
-}
-
-const Overlay: React.FC<IOverlay> = ({ active, children }) => {
-  const [, dispatch] = useStateValue();
-  const isActive = active ? "--active" : "";
+const Overlay: React.FC = ({ children }) => {
+  const { state: { overlayActive }, dispatch } = useContext(StoreContext);
+  const isActive = overlayActive ? "overlay--active" : "";
 
   const onCloseOverlay = () => {
     dispatch({ type: "toggleOverlay", payload: false });
-    document.body.style.overflow = "auto";
+    dispatch({ type: "toggleSearch", payload: false });
+    dispatch({ type: "toggleFilter", payload: false });
   };
 
+  useEffect(() => {
+    if (overlayActive) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [overlayActive]);
+
   return (
-    <section className={`${styles["overlay"]} ${styles[`overlay${isActive}`]}`}>
+    <section className={`${styles["overlay"]} ${styles[isActive]}`}>
       <header className={styles["overlay__header"]}>
         <Button
           type="link"

@@ -1,9 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SecondaryMenu from './SecondaryMenu';
+import React from "react";
+import { render, fireEvent, cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<SecondaryMenu />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import SecondaryMenu from "./SecondaryMenu";
+
+afterEach(cleanup);
+
+it("renders overlay input", () => {
+  const { queryAllByRole } = render(<SecondaryMenu />);
+  const button = queryAllByRole("button");
+  expect(button.length).toBe(2);
 });

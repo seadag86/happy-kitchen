@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { StateProvider } from './state';
+import { StoreProvider } from './store';
 import { initialState, reducer } from './reducer';
+import './index.scss'
 
 ReactDOM.render(
-  <StateProvider initialState={initialState} reducer={reducer}>
+  <StoreProvider initialState={initialState} reducer={reducer}>
     <App />
-  </StateProvider>,
+  </StoreProvider >,
   document.getElementById('root')
 );
 
