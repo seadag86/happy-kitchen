@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Recipe.module.scss';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 
 export interface IRecipe {
   id: number;
@@ -28,15 +28,21 @@ const Recipe: React.FC<IRecipe> = ({
   };
 
   return (
-    <Card
-      cover={<img src={imageUrl('480x360')} alt={image} />}
-      actions={[<span>DETAILS</span>]}
-      className={styles.recipe}
-    >
-      <h2>{title}</h2>
-      <p>Ready in {readyInMinutes} minutes</p>
-      <p>Serves {servings}</p>
-    </Card>
+    <article className={styles['recipe']}>
+      <Card
+        cover={<img src={imageUrl('480x360')} alt={image} />}
+        className={styles['recipe__card']}
+      >
+        <h2>{title}</h2>
+        <p>Ready in {readyInMinutes} minutes</p>
+        <p>Serves {servings}</p>
+      </Card>
+
+      <section className={styles['recipe__actions']}>
+        <Button className={styles['recipe__button']} htmlType="button" ghost>Details</Button>
+        <Button className={styles['recipe__button']} htmlType="button" ghost>Add to Basket</Button>
+      </section>
+    </article>
   );
 };
 
