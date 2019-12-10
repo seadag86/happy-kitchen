@@ -23,12 +23,13 @@ export const initialState: IState = {
   recipesLoaded: false,
   overlayActive: false,
   searchActive: false,
-  searchQuery: "",
+  searchQuery: "random",
   filterActive: false,
-  filterChoices: filters,
+  filterChoices: filters
 };
 
 export const reducer = (state = initialState, action: IAction) => {
+  console.log(action.payload);
   switch (action.type) {
     case "loadRecipes":
       return { ...state, recipes: action.payload };
@@ -41,7 +42,7 @@ export const reducer = (state = initialState, action: IAction) => {
     case "toggleFilter":
       return { ...state, filterActive: action.payload };
     case "submitFilters":
-      return { ...state, filterChoices: state.filterChoices };
+      return { ...state, filterChoices: action.payload };
 
     default:
       return state;
